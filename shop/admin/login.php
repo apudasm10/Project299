@@ -38,7 +38,7 @@
 			</div>
 		</form><!-- form -->
 		<div class="button">
-			<a href="#">Home of Gadget BD</a>
+			<a href="#">Home of Gadgets BD</a>
 		</div><!-- button -->
 	</section><!-- content -->
 </div><!-- container -->
