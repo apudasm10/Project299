@@ -6,6 +6,7 @@ blockquote:before,blockquote:after,q:before,q:after{content:'';content:none;}
 table{border-collapse:collapse;border-spacing:0;}
 /* start editing from here */
 a{text-decoration:none;}
+.paymentdis{ color: black;}
 .txt-rt{text-align:right;}/* text align right */
 .txt-lt{text-align:left;}/* text align left */
 .txt-center{text-align:center;}/* text align center */
@@ -53,7 +54,7 @@ body{
 	float:left;
 	border: 1px solid #DBDBDB;
 	position:relative;
-	width:47%;
+	width:41%;
 }
 .search_box input[type="text"]{
 	width:74%;
@@ -153,7 +154,7 @@ input[type="number"] {
 	cursor:pointer;
 	outline:none;
 }
-.wrapper-dropdown.active .dropdown{
+.wrapperhttp://localhost/shop/profile.php-dropdown.active .dropdown{
 	border-bottom: 1px solid rgba(0, 0, 0, 0.2);
 	max-height: 400px;
 	width: 95px;
@@ -161,7 +162,7 @@ input[type="number"] {
 	background: #70389C;
 }
 .login {
-    background: rgba(0, 0, 0, 0) url(../images/gradient_light-1.png) repeat-x scroll 0 0;
+
     border: 1px solid #cecece;
     box-sizing: border-box;
     color: #444;
@@ -172,6 +173,8 @@ input[type="number"] {
     margin-left: 10px;
     text-align: center;
     width: 144px;
+    background: #d2cbcb;
+    box-shadow: -13px 8px 11px 0px #bebebe, 20px -20px 60px #ffffff;
 }
 .login a {
 	color:#333;
@@ -471,7 +474,7 @@ p.note{
 }
 .listview_1_of_2:first-child { margin-left: 0; } 
 .images_1_of_2 {
-	width: 46.2%;
+	width: 44.2%;
 	padding:1.5%; 
 }
 .listimg_2_of_1 {
@@ -2480,3 +2483,29 @@ p.terms {
 }
 .success{font-size: 18px;color: green}
 .error{font-size: 18px;color: red}
+#picture{
+	display: flex;
+ 
+    margin-top: -37px;
+}
+
+.switch{
+	
+}
+
+.bkash{
+    margin-left: -107px;
+    margin-top: 51px;
+
+}
+
+.bkash a img{
+    
+    margin-right: 108px;
+    margin-left: -33px;
+
+
+}
+
+
+

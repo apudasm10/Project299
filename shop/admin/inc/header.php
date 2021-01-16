@@ -46,7 +46,7 @@
         <div class="grid_12 header-repeat">
             <div id="branding">
                 <div class="floatleft logo">
-                    <p style="color: #fff;font-size:20px;margin-left: 20px">Home of Gadget BD</p>
+                    <p style="color: #fff;font-size:20px;margin-left: 20px">Home of gadgets BD</p>
 				</div>
 				
                 <div class="floatright">
@@ -60,7 +60,7 @@
                 ?>
                     <div class="floatleft marginleft10">
                         <ul class="inline-ul floatleft">
-                           <li>Hello <?php //echo Session::get('adminName'); ?></li>
+                            <li>Hello <?php echo Session::get('adminName'); ?></li>
                             <li><a href="?action=logout">Logout</a></li>
                         </ul>
                     </div>

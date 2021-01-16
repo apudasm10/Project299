@@ -62,8 +62,7 @@ class Cart {
 
 	     	$updated_row = $this->db->update($query);
 	     	If($updated_row){
-		   $msg = "<span class='success'>quantity updated successfully.</span>";
-			return $msg;
+		   header("Location:cart.php");
 	     }else{
 		      $msg="<span class='error'>quantity not Updated successfully.</span>";
             return $msg;
@@ -80,6 +79,104 @@ class Cart {
 			$msg="<span class='error'>Product not deleted.</span>";
             return $msg;
 		}
+	}
+	public function checkCartTable(){
+		$sId=session_id();
+		$query= "SELECT * FROM tbl_cart WHERE sId='$sId'";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function delCustomerCart(){
+        $sId= session_id();
+        $query="DELETE FROM tbl_cart WHERE sId='$sId'";
+        $this->db->delete($query);
+	}
+	public function orderProduct($cmrId){
+		$sId=session_id();
+		$query= "SELECT * FROM tbl_cart WHERE sId='$sId'";
+		$getPro = $this->db->select($query);
+		if ($getPro) {
+			while ($result = $getPro->fetch_assoc()) {
+				$productId = $result['productId'];
+				$productName = $result['productName'];
+				$quantity = $result['quantity'];
+				$price = $result['price'] * $quantity;
+				$image = $result['image'];
+
+	     	$query = "INSERT INTO tbl_order(cmrId,productId,productName,quantity,price,image) VALUES('$cmrId','$productId','$productName','$quantity','$price','$image')";
+           $inserted_row=$this->db->insert($query);
+			}	}
+	}
+	public function payableAmount($cmrId){
+		$query= "SELECT price FROM tbl_order WHERE cmrId='$cmrId' AND date = now()";
+		$result=$this->db->select($query);
+		return $result;
+	}
+	
+	public function getOrderProduct($cmrId){
+		$query= "SELECT * FROM tbl_order WHERE cmrId='$cmrId' ORDER BY date DESC ";
+		$result=$this->db->select($query);
+		return $result;
+	}
+
+	public function checkOrder($cmrId){
+		$query= "SELECT * FROM tbl_order WHERE cmrId='$cmrId'";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function getAllOrderPro(){
+		$query= "SELECT * FROM tbl_order ORDER BY date DESC ";
+		$result = $this->db->select($query);
+		return $result;
+	}
+	public function productShifted($id,$date,$price){
+		$id=mysqli_real_escape_string($this->db->link, $id);
+		$date=mysqli_real_escape_string($this->db->link, $date);
+		$price=mysqli_real_escape_string($this->db->link, $price);
+
+		$query="UPDATE tbl_order
+	     	        SET status='1'
+	     	        WHERE cmrId='$id' AND date='$date' AND price='$price' " ;
+	     	$updated_row = $this->db->update($query);
+	     	If($updated_row){
+		   $msg = "<span class='success'> updated successfully.</span>";
+			return $msg;
+	     }else{
+		      $msg="<span class='error'>Not Updated successfully.</span>";
+            return $msg;
+	     }
+	}
+	public function delProductShifted($id,$time,$price){
+		$id=mysqli_real_escape_string($this->db->link, $id);
+		$date=mysqli_real_escape_string($this->db->link, $time);
+		$price=mysqli_real_escape_string($this->db->link, $price);
+
+		$query = "DELETE FROM tbl_order WHERE cmrId='$id' AND date='$date' AND price='$price'";
+		$deldata = $this->db->delete($query);
+		if ($deldata) {
+			$msg="<span class='success'>Data deleted successfully.</span>";
+            return $msg;
+		}else{
+			$msg="<span class='error'>Data not deleted.</span>";
+            return $msg;
+		}
+	}
+	public function productShiftConfirm($id,$time,$price){
+		$id=mysqli_real_escape_string($this->db->link, $id);
+		$date=mysqli_real_escape_string($this->db->link, $time);
+		$price=mysqli_real_escape_string($this->db->link, $price);
+
+		$query="UPDATE tbl_order
+	     	        SET status='2'
+	     	        WHERE cmrId='$id' AND date='$date' AND price='$price' " ;
+	     	$updated_row = $this->db->update($query);
+	     	If($updated_row){
+		   $msg = "<span class='success'> updated successfully.</span>";
+			return $msg;
+	     }else{
+		      $msg="<span class='error'>Not Updated successfully.</span>";
+            return $msg;
+	     }
 	}
 }
 ?>

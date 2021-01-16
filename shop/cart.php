@@ -15,6 +15,11 @@
           }
       }
  ?>
+<?php
+  if(!isset($_GET['id'])){
+  	echo "<meta http-equiv='refresh' content='0;URL=?id=live'/>";
+  } 
+?>
  <div class="main">
     <div class="content">
     	<div class="cartoption">		
@@ -43,6 +48,7 @@
 							    if($getPro){
 							    	$i=0;
 							    	$sum=0;
+							    	$qty = 0;
 							    	while ( $result=$getPro->fetch_assoc()) {
 							    $i++;
 							?>
@@ -62,14 +68,21 @@
                                      $total=$result['price'] * $result['quantity'];
 								echo $total; 
 								?></td>
-								<td><a onclick="return confirm('Are you sure to delete?');" href="?delpro=<?php echo $result['cartId']; ?>">X</a></td>
+								<td><a onclick="return confirm('Are you sure, you want to delete?');" href="?delpro=<?php echo $result['cartId']; ?>">X</a></td>
 							</tr>
 							<?php
+							$qty = $qty + $result['quantity'];
 							$sum= $sum+$total; 
+							Session::set("qty", $qty);
+							Session::set("sum", $sum);
 							?>
 							<?php }} ?>
 							
 						</table>
+						<?php
+						$getData = $ct->checkCartTable();
+										if ($getData){
+						?>
 						<table style="float:right;text-align:left;" width="40%">
 							<tr>
 								<th>Sub Total : </th>
@@ -91,13 +104,17 @@
 								 </td>
 							</tr>
 					   </table>
+					<?php } else {
+						header("Location:index.php");
+							//echo "Cart is Empty, please shop now.";
+					}?>
 					</div>
 					<div class="shopping">
 						<div class="shopleft">
 							<a href="index.php"> <img src="images/shop.png" alt="" /></a>
 						</div>
 						<div class="shopright">
-							<a href="login.php"> <img src="images/check.png" alt="" /></a>
+							<a href="payment.php"> <img src="images/check.png" alt="" /></a>
 						</div>
 					</div>
     	</div>  	
